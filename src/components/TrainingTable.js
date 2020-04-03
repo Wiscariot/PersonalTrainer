@@ -5,10 +5,8 @@ import Moment from 'moment';
 
 export default function CustomersTable(props) {
     const [trainings, setTrainings] = useState([]);
-
     useEffect(() => fetchData(), []);
 
-    
     const columns = [
         {title:'date', field: 'date',
          render: date => { return Moment(date.timestamp)
@@ -34,7 +32,7 @@ export default function CustomersTable(props) {
             <MaterialTable 
                 data={trainings} 
                 columns={columns} 
-                title="Customers"
+                title="Trainings"
                 options={{ 
                     search: true,
                     

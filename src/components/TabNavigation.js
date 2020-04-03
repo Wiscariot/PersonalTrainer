@@ -4,9 +4,15 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {Link as RouterLink} from 'react-router-dom';
 import {MemoryRouter as Router} from 'react-router-dom';
+import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import AddCustomer from './AddCustomer';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import Link from '@material-ui/core/Link';
+import CustomersTable from './CustomersTable';
+import TrainingTable from './TrainingTable';
 
-export default function TabNavigation() {
- // const [value, setValue] = useState("customers");
+export default function TabNavigation(props) {
+ const [value, setValue] = useState(1);
 
  /* const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -16,16 +22,18 @@ export default function TabNavigation() {
    <Router>
     <Paper>
       <Tabs
-        //value={value}
+        //value={1}
         //onChange={handleChange}
         indicatorColor="primary"
         textColor="primary"
         centered
       >
-        <Tab label="Customers" value="customers" href="/customers"/>
-        <Tab label="Trainings" value="trainings" href="/" /> 
+        <Tab label="Customers"  href="/customers"/>
+        <Tab label="Trainings"  href="/" />
+        <Tab label="Calendar"  href="/calendar" />
       </Tabs>
     </Paper>
+    
    </Router> 
   );
 }
