@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import { Calendar, momentLocalizer } from 'react-big-calendar'
-import moment from 'moment'
+import BigCalendar from 'react-big-calendar';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import moment from 'moment';
 import css from 'react-big-calendar/lib/css/react-big-calendar.css';
  
 
@@ -9,11 +10,7 @@ export default function TrainingCalendar(props) {
     moment.locale();
     
     const [trainings, setTrainings] = useState([]);
-    const [training, setTraining] = useState({
-        title: '',
-        start: '',
-        end: '',
-    })
+    
 
     const fetchData = () => {
         fetch('https://customerrest.herokuapp.com/gettrainings')
@@ -34,13 +31,18 @@ export default function TrainingCalendar(props) {
     
     
     return(
-        <div>
+        <div style={{
+            maxWidth:'85%', 
+            margin: 'auto',
+            marginTop:'30px',
+            height : '850px',
+            }}>
             <Calendar
             localizer={localizer}
             events={trainingEvents}
             startAccessor="start"
             endAccessor="end"
-            style={{css, height: 500 }}
+            defaultView="month"
             />
         </div>
     )

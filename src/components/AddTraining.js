@@ -8,26 +8,27 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 export default function AddCustomer(props) {
-  const [open, setOpen] = useState(false);
-  const [date, setDate] = useState([]);
-  const [training, setTraining] = useState({
+    const [open, setOpen] = useState(false);
+    const [date, setDate] = useState([]);
+    const [training, setTraining] = useState({
     date:'',
     activity:'',
     duration:'',
     customer:`${props.customer.links[0].href}`,
     
-});
+    });
 
-  const handleClickOpen = () => setOpen(true);
+    const handleClickOpen = () => setOpen(true);
   
 
-  const handleClose = () => setOpen(false);
-  const handleInputChange = (e) => setTraining({...training, [e.target.name]: e.target.value});
+    const handleClose = () => setOpen(false);
+    const handleInputChange = (e) => setTraining({...training, [e.target.name]: e.target.value});
 
-  const updateTraining = (element, link, method) => {
+    const updateTraining = (element, link, method) => {
     handleDate();
     
     fetch(link, {
@@ -39,12 +40,26 @@ export default function AddCustomer(props) {
     })
     .catch(err => console.error(err))
     handleClose()
-  }
+    handlePopup()
+    }
 
-  const handleDate = () => {
+    const handleDate = () => {
       const parseDate = Moment().toISOString(training.date);
         setTraining({...training, date:parseDate});
     }
+    
+    const Alert = (props) => {
+        return <MuiAlert elevation={6} variant="filled" {...props} />;
+      }
+    const message = `You set ${training.activity} for ${props.customer.firstname} ${props.customer.lastname}`;
+    const [popUp, setPopUp] = useState(false);
+    const handlePopup = () => setPopUp(true);
+    const popupClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setPopUp(false);
+    };
     
     return(
     <div>
@@ -106,6 +121,12 @@ export default function AddCustomer(props) {
           </Button>
         </DialogActions>
       </Dialog>
+      
+        <Snackbar open={popUp} autoHideDuration={6000} onClose={popupClose}>
+          <Alert onClose={popupClose} severity="success">
+            {message}
+          </Alert>
+        </Snackbar>
     </div>
   )
 }

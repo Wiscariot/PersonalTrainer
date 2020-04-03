@@ -6,6 +6,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Tab from '@material-ui/core/Tab';
 import Button from '@material-ui/core/Button';
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 
 export default function AddCustomer(props) {
@@ -30,16 +33,40 @@ export default function AddCustomer(props) {
   const updateCustomer = (customer, link, method) => {
     props.updateCustomer(customer, link, method);
     handleClose()
+    handlePopup()
+    setCustomer({
+      firstname:'',
+      lastname:'',
+      streetaddress:'',
+      postcode:'',
+      city:'',
+      email:'',
+      phone:'',
+      link:'https://customerrest.herokuapp.com/api/customers'
+  });
   }
+
+  const Alert = (props) => {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+  const message = `You add new customer: ${customer.firstname} ${customer.lastname}`;
+  const [popUp, setPopUp] = useState(false);
+  const handlePopup = () => setPopUp(true);
+  const popupClose = (event, reason) => {
+  if (reason === 'clickaway') {
+    return;
+  }
+  setPopUp(false);
+};
 
 
     return(
     <div>
       
-      <Tab label="Add New Customer" style={{color:'red'}} value="trainings" onClick={handleClickOpen} />
+      <Button style={{color:'red', margin:'auto'}} value="trainings" onClick={handleClickOpen}><AddBoxIcon/> Add New Customer</Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         
-        <DialogTitle id="form-dialog-title">Edit Customer</DialogTitle>
+        <DialogTitle id="form-dialog-title">Add Customer</DialogTitle>
         
         <DialogContent>
 
@@ -119,6 +146,12 @@ export default function AddCustomer(props) {
           </Button>
         </DialogActions>
       </Dialog>
+
+      <Snackbar open={popUp} autoHideDuration={6000} onClose={popupClose}>
+        <Alert onClose={popupClose} severity="success">
+            {message}
+        </Alert>
+        </Snackbar>
     </div>
   )
 }

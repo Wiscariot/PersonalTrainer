@@ -7,6 +7,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 
 export default function EditCustomer(props) {
@@ -52,7 +54,21 @@ export default function EditCustomer(props) {
     const updateCustomer = (customer, link, method) => {
       props.updateCustomer(customer, link, method);
       handleClose()
+      handlePopup()
     }
+
+    const Alert = (props) => {
+      return <MuiAlert elevation={6} variant="filled" {...props} />;
+    }
+  const message = `Your changes have saved successfully!`;
+  const [popUp, setPopUp] = useState(false);
+  const handlePopup = () => setPopUp(true);
+  const popupClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setPopUp(false);
+  };
 
 
     return(
@@ -142,6 +158,11 @@ export default function EditCustomer(props) {
           </Button>
         </DialogActions>
       </Dialog>
+      <Snackbar open={popUp} autoHideDuration={6000} onClose={popupClose}>
+          <Alert onClose={popupClose} severity="success">
+            {message}
+          </Alert>
+        </Snackbar>
     </div>
   )
 }
