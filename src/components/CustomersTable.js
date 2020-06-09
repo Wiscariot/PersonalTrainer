@@ -23,6 +23,7 @@ import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import Clear from "@material-ui/icons/Clear";
 import DeleteOutline from "@material-ui/icons/DeleteOutline";
 import Edit from "@material-ui/icons/Edit";
+import '../style.css'
 
 export default function CustomersTable(props) {
 const [customers, setCustomers] = useState ([]);
