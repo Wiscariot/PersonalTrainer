@@ -3,7 +3,7 @@ import MaterialTable from 'material-table';
 import Moment from 'moment';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import IconButton from '@material-ui/core/Iconbutton'
+import IconButton from '@material-ui/core/IconButton'
 import DeleteButton from '@material-ui/icons/Delete';
 import Search from '@material-ui/icons/Search'
 import ViewColumn from "@material-ui/icons/ViewColumn";
