@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import MaterialTable from 'material-table';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import IconButton from '@material-ui/core/Iconbutton'
+import IconButton from '@material-ui/core/IconButton'
 import DeleteButton from '@material-ui/icons/Delete';
 import EditCustomer from './EditCustomer';
 import AddCustomer from './AddCustomer';
